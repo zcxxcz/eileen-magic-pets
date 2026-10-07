@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "catalog": "https://zcxxcz.github.io/eileen-magic-pets/catalog.json",
+  "records": [
+    {
+      "id": "magic-pets",
+      "title": "Eileen 的魔法宠物屋",
+      "type": "应用",
+      "summary": "完成学习、领取奖励，陪伴小宠物成长；支持家庭云存档。",
+      "tags": [
+        "家庭游戏"
+      ],
+      "url": "https://zcxxcz.github.io/eileen-magic-pets/",
+      "updated": "2026-10-07",
+      "featured": true,
+      "textPaths": []
+    }
+  ]
+}

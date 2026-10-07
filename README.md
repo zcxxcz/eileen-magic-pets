@@ -39,7 +39,7 @@ npm run dev -- --port 5173
 
 1. 仓库 Settings → Secrets and variables → Actions → Variables 设置 `VITE_SUPABASE_URL` 和 `VITE_SUPABASE_PUBLISHABLE_KEY`。
 2. Settings → Pages 的 Source 选择 **GitHub Actions**。
-3. 推送到 `main`，或运行 **Publish game** 工作流。工作流安装依赖、跑单元测试、构建和发布 `dist`。
+3. 推送到 `main`，或运行 **Publish Pages** 工作流。工作流安装依赖、跑单元测试、构建和发布 `dist`。
 4. Vite 使用相对资源路径，支持 `https://用户名.github.io/仓库名/` 子目录，无需单独的服务器路由。
 5. 发布后在手机与电脑各登录一次。首次迁移、跨设备刷新和实际操作都成功后，才算真实双设备联调完成。
 
@@ -92,3 +92,11 @@ npm run test:ui
 ## 当前边界
 
 没有连接学习机 Pad、读取课程或按学习时间发奖，仍由家长确认学习完成。一个账号一份家庭存档，无公开注册、支付和社交功能。登录身份控制云端访问；本版本不提供对家庭成员的强防作弊保护。
+
+## 统一发布与内容索引
+
+总入口：https://zcxxcz.github.io/ 。本项目通过公开 `catalog.json` 接入全文搜索。`publish.json` 显式列出公开内容，不包含账号数据。
+
+Windows/macOS 均安装 Node.js 24、Git 与 GitHub CLI，先 `gh auth login`。使用独立任务分支，提交本任务文件后运行 `npm run publish`：创建 PR → 等待 Publish Pages 检查 → 自动合并 → GitHub Actions 构建发布 → 自动刷新总索引。工作区必须干净；main 更新时先合并最新 main 并解决冲突。不需要本地运行 gh-pages。
+
+Pages Source 使用 GitHub Actions，正式产物只由云端构建。直接推送 main 后，总索引由每日补漏任务更新；需要立即更新则运行 `node scripts/publish.mjs --refresh-only`。不自动执行数据库迁移。新增或修改公开内容时同步 publish.json 的元信息和 textPaths；不得将私人文件加入索引。
