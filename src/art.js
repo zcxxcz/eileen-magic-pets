@@ -1,3 +1,4 @@
+import {outfitArt} from './outfit-art.js';
 import {SPECIES,ITEMS,PRIZES,level} from './game.js';
 export const icons={home:'⌂',wardrobe:'♧',zoo:'♧',nursery:'♧'};
 const star=(x,y,r=12,color='#edc86d')=>`<path d="M ${x} ${y-r} l ${r*.3} ${r*.65} ${r*.7} ${r*.1} -${r*.5} ${r*.5} ${r*.12} ${r*.7} -${r*.62} -${r*.33} -${r*.62} ${r*.33} ${r*.12} -${r*.7} -${r*.5} -${r*.5} ${r*.7} -${r*.1} Z" fill="${color}"/>`;
@@ -12,9 +13,9 @@ export function petArt(p,{mini=false}={}){
  <ellipse cx="130" cy="212" rx="35" ry="39" fill="#fff0dc"/>
  ${o.bottom?`<path d="M82 216 Q130 229 178 216 L176 253 137 253 131 236 126 253 86 253Z" fill="${item(o.bottom).color}"/>`:''}
  ${o.top?`<path d="M94 162 L75 188 91 202 97 190 92 225 Q130 235 169 225 L164 190 174 202 188 188 167 162Z" fill="${item(o.top).color}"/><path d="M116 166 Q130 183 144 166" fill="none" stroke="#fff6e9" stroke-width="6"/>`:''}
- ${o.dress?`<path d="M105 161 L155 161 168 191 187 251 Q130 275 73 251 L95 191Z" fill="${item(o.dress).color}"/><path d="M96 192 Q130 207 167 192" fill="none" stroke="#fff0dd" stroke-width="6"/>${star(108,231,8,'#fff2cc')}${star(150,244,8,'#fff2cc')}`:''}
+ ${outfitArt(o.dress)}
  <ellipse cx="80" cy="198" rx="16" ry="28" transform="rotate(22 80 198)" fill="${c}"/><ellipse cx="181" cy="197" rx="16" ry="28" transform="rotate(-30 181 197)" fill="${c}"/>
- ${o.bracelet?`<path d="M68 215 Q80 223 91 214" stroke="${item(o.bracelet).color}" stroke-width="8" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>`:''}
+ ${outfitArt(o.bracelet)}
  ${ears}<ellipse cx="130" cy="117" rx="66" ry="61" fill="${c}"/>
  ${sp.id==='fox'?'<path d="M65 110 Q87 118 129 145 Q171 118 195 110 Q191 179 130 178 Q69 178 65 110" fill="#fff1df"/>':''}
  <ellipse cx="106" cy="120" rx="5.5" ry="7" fill="#594739"/><ellipse cx="155" cy="120" rx="5.5" ry="7" fill="#594739"/><circle cx="108" cy="118" r="1.8" fill="white"/><circle cx="157" cy="118" r="1.8" fill="white"/>
@@ -22,7 +23,7 @@ export function petArt(p,{mini=false}={}){
  <ellipse cx="89" cy="140" rx="12" ry="7" fill="#e5a497" opacity=".55"/><ellipse cx="174" cy="140" rx="12" ry="7" fill="#e5a497" opacity=".55"/>
  ${cat?'<path d="M80 133 L58 130 M80 144 L57 147 M181 133 L204 130 M181 144 L203 147" stroke="#b28870" stroke-width="2.5" stroke-linecap="round"/>':''}
  ${o.makeup==='blush'?'<ellipse cx="89" cy="140" rx="14" ry="9" fill="#e599a7"/><ellipse cx="174" cy="140" rx="14" ry="9" fill="#e599a7"/>':o.makeup==='stars'?`${star(89,141,10)}${star(174,141,10)}`:''}
- ${o.clip==='bow'?'<path d="M158 80 Q147 48 172 64 Q202 40 194 77 Q180 79 174 69Z" fill="#d893ac"/><circle cx="174" cy="68" r="7" fill="#b86d8b"/>':o.clip==='flower'?'<g fill="#f1cf77"><circle cx="172" cy="61" r="10"/><circle cx="183" cy="71" r="10"/><circle cx="173" cy="81" r="10"/><circle cx="162" cy="71" r="10"/></g><circle cx="173" cy="71" r="7" fill="#fff5dc"/>':''}
+ ${outfitArt(o.clip)}
  ${l>=2?'<path d="M107 173 L131 181 152 172" fill="none" stroke="#e4b964" stroke-width="6"/>':''}
  ${l===3?`<path d="M104 58 L100 37 117 46 130 26 144 46 161 37 156 58Z" fill="#efcb77" stroke="#d9b263" stroke-width="2"/><circle cx="130" cy="46" r="4" fill="#e398aa"/>`:''}
  ${o.hand?`<path d="M186 204 L214 129" stroke="#ab8aab" stroke-width="7" stroke-linecap="round"/>${o.hand==='wand'?star(216,121,25):'<path d="M215 139 C172 113 204 92 215 110 C232 90 253 116 215 139" fill="#d98da6"/>'}${star(237,150,7)}${star(199,91,6)}`:''}

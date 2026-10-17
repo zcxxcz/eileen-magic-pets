@@ -4,14 +4,22 @@ export const SPECIES = [
 ].map(([id,label,name,color])=>({id,label,name,color}));
 export const ITEMS = {
  clothes:[{id:'mint-top',name:'薄荷上衣',cost:1,kind:'top',color:'#a7cbb7'},{id:'pink-top',name:'桃桃上衣',cost:1,kind:'top',color:'#e6aab9'},{id:'blue-pants',name:'云朵裤子',cost:1,kind:'bottom',color:'#9dbacd'},{id:'yellow-pants',name:'奶油裤子',cost:1,kind:'bottom',color:'#e8ce8b'}],
- bracelet:[{id:'pearl',name:'珍珠手镯',cost:1,color:'#fff4d7'},{id:'jade',name:'薄荷手镯',cost:1,color:'#8fbfa4'}],
- clip:[{id:'bow',name:'蝴蝶结发卡',cost:1,color:'#d893ac'},{id:'flower',name:'小花发卡',cost:1,color:'#f1cf77'}],
+ bracelet:[{id:'pearl',name:'珍珠手镯',cost:1,color:'#fff4d7'},{id:'jade',name:'薄荷手镯',cost:1,color:'#8fbfa4'},
+ {id:'bell-bracelet',name:'铃铛手镯',cost:1,color:'#e3b657'},{id:'ribbon-bracelet',name:'丝带手镯',cost:1,color:'#d893ac'},
+ {id:'star-bracelet',name:'星星吊坠手镯',cost:1,color:'#b9abd8'},{id:'leaf-bracelet',name:'小叶子手镯',cost:1,color:'#88ac78'}],
+ clip:[{id:'bow',name:'蝴蝶结发卡',cost:1,color:'#d893ac'},{id:'flower',name:'小花发卡',cost:1,color:'#f1cf77'},
+ {id:'moon-clip',name:'月牙发卡',cost:1,color:'#e6bd65'},{id:'cherry-clip',name:'樱桃发卡',cost:1,color:'#d78191'},
+ {id:'butterfly-clip',name:'蝴蝶发卡',cost:1,color:'#b1a0cf'},{id:'rainbow-clip',name:'彩虹发卡',cost:1,color:'#dc9a9d'}],
  hand:[{id:'wand',name:'星星魔法棒',cost:0,color:'#edc667'},{id:'heart-wand',name:'爱心魔法棒',cost:1,color:'#d98da6'}],
  makeup:[{id:'blush',name:'桃桃腮红',cost:1,color:'#e6a0a5'},{id:'stars',name:'星星妆',cost:1,color:'#e9bd61'}]
 };
 export const PRIZES = [
  {id:'rose-dress',name:'玫瑰公主裙',kind:'dress',color:'#dc9db4',icon:'♕'},
  {id:'sky-dress',name:'星空纱裙',kind:'dress',color:'#b8acd8',icon:'✧'},
+ {id:'sailor-dress',name:'海军领百褶裙',kind:'dress',color:'#91b6ce'},
+ {id:'strawberry-dress',name:'草莓围裙',kind:'dress',color:'#e9a3ab'},
+ {id:'ballet-dress',name:'芭蕾蓬蓬裙',kind:'dress',color:'#d6b5d8'},
+ {id:'leaf-dress',name:'森林叶子裙',kind:'dress',color:'#a0bc8d'},
  {id:'flower-pot',name:'小花盆',kind:'decor',icon:'🌷'},
  {id:'mushroom',name:'童话蘑菇',kind:'decor',icon:'🍄'},
  {id:'gift',name:'蝴蝶结礼物',kind:'decor',icon:'🎁'},
