@@ -1,3 +1,4 @@
+import {ITEMS} from './game.js';
 import Ajv from 'ajv';
 import {saveSchema} from './save-schema.js';
 const check=new Ajv({strict:false}).compile(saveSchema);
@@ -7,7 +8,7 @@ export function validateSave(value){
  const ids=new Set(s.pets.map(p=>p.id));
  const valid=ids.size===s.pets.length && s.hatched===s.pets.length &&
   (s.pets.length?ids.has(s.selected):s.selected===null) &&
-  s.pets.every((p,i)=>p.id===`pet-${i+1}`&&p.generation===i+1&&Object.values(p.outfit).every(x=>s.owned.includes(x))&&!(p.outfit.dress&&(p.outfit.top||p.outfit.bottom))) &&
+  s.pets.every((p,i)=>p.id===`pet-${i+1}`&&p.generation===i+1&&Object.values(p.outfit).every(x=>s.owned.includes(x))&&!(p.outfit.dress&&(p.outfit.top||p.outfit.bottom))&&!(p.outfit.bottom&&ITEMS.clothes.find(i=>i.id===p.outfit.top)?.coversBottom)) &&
   s.lessons.every((l,i)=>l.id===i+1&&ids.has(l.pet)&&Number.isFinite(Date.parse(l.date))) &&
   new Set(s.lessons.map(l=>l.title)).size===s.lessons.length && (!s.trip||ids.has(s.trip.pet));
  if(!valid)throw Error('存档引用关系无效，原进度未修改。');
