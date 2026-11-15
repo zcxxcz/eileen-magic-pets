@@ -33,6 +33,22 @@ try{
  await page.locator('#parent-pin').fill('6291');await page.locator('#lesson-form button').click();await page.locator('.modal').waitFor({state:'hidden'});assert.equal(cloud.row.state.stars,stars+1);
  await openLesson();await page.locator('#lesson-name').fill('Pad新课程');await page.locator('#parent-pin').fill('6291');await page.locator('#parent-confirm').check();await page.locator('#lesson-form button').click();await expect(page.locator('#parent-error')).toContainText('已经领取');assert.equal(cloud.row.state.stars,stars+1);await page.locator('.close').click();
  console.log('PASS: isolated masked numeric PIN/course form, blank title rejected, wrong PIN rejected, valid lesson awarded once, duplicate blocked. No real password-manager profile inspected.');
+ await cat('necklace');assert.equal(await page.locator('[data-equip]').count(),2);
+ const beforeNecklaces=cloud.row.state.stars,necklaceTickets=cloud.row.state.tickets;
+ await wear('moonlight-necklace');
+ await expect(page.locator('.pet-stage [data-outfit="moonlight-necklace"]')).toBeVisible();
+ assert.equal(cloud.row.state.stars,beforeNecklaces-1);
+ await wear('strawberry-necklace');
+ await expect(page.locator('.pet-stage [data-outfit="strawberry-necklace"]')).toBeVisible();
+ assert.equal(cloud.row.state.stars,beforeNecklaces-2);
+ assert.equal(cloud.row.state.tickets,necklaceTickets);
+ await page.reload();await nav('wardrobe');await cat('necklace');
+ await expect(page.locator('.pet-stage [data-outfit="strawberry-necklace"]')).toBeVisible();
+ await wear('moonlight-necklace');assert.equal(cloud.row.state.stars,beforeNecklaces-2);
+ await page.locator('[data-remove="necklace"]').click();await wait();
+ assert.equal(cloud.row.state.pets[0].outfit.necklace,undefined);
+ assert.equal(cloud.row.state.pets[0].outfit.top,'mint-top');
+ console.log('PASS: two separate star redemptions, switching and removing necklaces, cloud reload, other clothes and tickets preserved.');
  for(const category of ['clothes','hand','makeup']){await cat(category);assert.equal(await page.locator('[data-equip]').count(),ITEMS[category].length);for(const item of ITEMS[category]){const beforePoints=cloud.row.state.pets[0].points,beforeTickets=cloud.row.state.tickets;await wear(item.id);const slot=item.kind||category;assert.equal(cloud.row.state.pets[0].outfit[slot],item.id);assert.equal(await page.locator(`.pet-stage [data-outfit="${item.id}"]`).count(),1);assert.equal(cloud.row.state.pets[0].points,beforePoints);assert.equal(cloud.row.state.tickets,beforeTickets);}}
  await cat('makeup');for(const [part,count] of [['face',4],['ear',3],['paw',3],['body',2]]){await page.locator(`[data-paint-part="${part}"]`).click();assert.equal(await page.locator('[data-equip]').count(),count);}await page.locator('[data-paint-part="all"]').click();
  assert.ok(cloud.row.state.pets[0].outfit.makeup&&cloud.row.state.pets[0].outfit.makeupEar&&cloud.row.state.pets[0].outfit.makeupPaw&&cloud.row.state.pets[0].outfit.makeupBody);

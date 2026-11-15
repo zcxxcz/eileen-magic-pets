@@ -139,6 +139,12 @@ Pages Source 使用 GitHub Actions，正式产物只由云端构建。直接推�
 
 先在已有 Supabase 项目执行 `supabase/migrations/004_fantasy_wardrobe.sql`，再发布前端。它仅更新存档验证函数，增加 60 个总物品 ID、16 种物种和 3 个可选彩绘字段（`makeupEar`、`makeupPaw`、`makeupBody`）；原 `makeup` 字段仍表示脸部彩绘。存档版本保持 1，不填充默认数据、不覆盖家庭记录、不更改账号或密码。
 
+## 魔法项链（2026-11-15）
+
+魔法衣橱的「项链」里有月光水晶项链和草莓珍珠项链。家长每确认一课获得 1 颗兑换星星，每条项链只在首次兑换时花 1 颗星星。戴上另一条会替换当前项链，已经拥有的款式可以反复戴，也可以单独卸下。
+
+已有 Supabase 项目需在发布前运行 `supabase/migrations/005_necklaces.sql`，使存档校验接受两条新项链和可选的项链栏位。存档仍是 v1，迁移不写入家庭存档或历史记录；新项目已在 `001_validation.sql` 包含此规则。可运行 `supabase/tests/necklaces.sql` 只读核对新旧存档。
+
 2026-10-25 已实际应用该函数，并以只读 `supabase/tests/fantasy_wardrobe.sql` 检查：16 物种 × 60 物品 × 3 成长阶段，共 2,880 组存档均有效，未知物品全部拒绝；现有家庭存档和历史快照均有效，没有写入测试样本。证据截图：`artifacts/cloud-fantasy-verified.png`。
 
 `tests/fantasy.test.js` 验证结构多样性、独立彩绘层、扣费、旧字段、多物种、成长旅行和选择稳定性；`tests/fantasy-browser.mjs` 验证所有新款实际显示、分类/位置筛选、卸下与刷新恢复，模拟超过三个云同步周期验证选择不跳回，并检查课程/PIN 与账号字段隔离。测试仅使用独立模拟存档，含桌面和 390px 布局。示例图：`artifacts/fantasy-showcase.png`、`artifacts/fantasy-species.png`。
