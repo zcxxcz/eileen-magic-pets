@@ -19,6 +19,9 @@ export const ITEMS = {
  clip:[{id:'bow',name:'蝴蝶结发卡',cost:1,color:'#d893ac'},{id:'flower',name:'小花发卡',cost:1,color:'#f1cf77'},
  {id:'moon-clip',name:'月牙发卡',cost:1,color:'#e6bd65'},{id:'cherry-clip',name:'樱桃发卡',cost:1,color:'#d78191'},
  {id:'butterfly-clip',name:'蝴蝶发卡',cost:1,color:'#b1a0cf'},{id:'rainbow-clip',name:'彩虹发卡',cost:1,color:'#dc9a9d'}],
+ necklace:[
+  {id:'moonlight-necklace',name:'月光水晶项链',cost:1,kind:'necklace',color:'#b5accf'},
+  {id:'strawberry-necklace',name:'草莓珍珠项链',cost:1,kind:'necklace',color:'#df9ba9'}],
  hand:[{id:'wand',name:'星星魔法棒',cost:0,color:'#edc667'},{id:'heart-wand',name:'爱心魔法棒',cost:1,color:'#d98da6'},
  {id:'moon-wand',name:'月牙铃铛魔法棒',cost:1,color:'#d9bd77'},
  {id:'bubble-wand',name:'泡泡魔法棒',cost:1,color:'#9fc9ce'},
@@ -89,7 +92,7 @@ export function equip(s,category,id){
  if(slot==='dress'){delete p.outfit.top;delete p.outfit.bottom;}
  if(slot==='top'||slot==='bottom')delete p.outfit.dress;
 }
-export const OUTFIT_LABELS={top:'上衣／套装',bottom:'裤子',dress:'裙子',clip:'发卡',bracelet:'手镯',hand:'手持物',makeup:'脸部彩绘',makeupEar:'耳侧／头顶彩绘',makeupPaw:'爪爪彩绘',makeupBody:'身体彩绘',decor:'小摆件'};
+export const OUTFIT_LABELS={top:'上衣／套装',bottom:'裤子',dress:'裙子',clip:'发卡',bracelet:'手镯',necklace:'项链',hand:'手持物',makeup:'脸部彩绘',makeupEar:'耳侧／头顶彩绘',makeupPaw:'爪爪彩绘',makeupBody:'身体彩绘',decor:'小摆件'};
 export function unequip(s,slot){const p=current(s);if(!p)throw Error('先孵化一只宠物吧。');if(!Object.hasOwn(OUTFIT_LABELS,slot))throw Error('请选择要卸下的装扮。');delete p.outfit[slot];}
 export function collect(s){const p=current(s);if(!p||!p.eggReady)throw Error('成年后会有第一颗魔法蛋。');s.eggs++;p.eggReady=false;p.eggProgress=0;}
 export function feed(s){const p=current(s);if(!p||p.location!=='zoo'||s.trip?.pet===p.id)throw Error('等宠物到动物园再喂食吧。');p.food++;}

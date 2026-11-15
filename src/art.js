@@ -33,7 +33,7 @@ export function petArt(p,{mini=false}={}){
  ${paintArt(o.makeup,p.species)}
  ${paintArt(o.makeupEar,p.species)}
  ${outfitArt(o.clip)}
- ${l>=2?'<path d="M107 173 L131 181 152 172" fill="none" stroke="#e4b964" stroke-width="6"/>':''}
+ ${o.necklace?outfitArt(o.necklace):l>=2?'<path d="M107 173 L131 181 152 172" fill="none" stroke="#e4b964" stroke-width="6"/>':''}
  ${l===3?`<path d="M104 58 L100 37 117 46 130 26 144 46 161 37 156 58Z" fill="#efcb77" stroke="#d9b263" stroke-width="2"/><circle cx="130" cy="46" r="4" fill="#e398aa"/>`:''}
  ${themeArt(o.hand)}
  </g></svg>`;

@@ -7,8 +7,23 @@ import {validateSave,parseBackup,backupText} from '../src/save-validation.js';
 import {PetSelection} from '../src/pet-selection.js';
 const allItems=[...Object.values(ITEMS).flat(),...PRIZES];
 const funded=()=>{const s=fresh();hatch(s);for(let i=0;i<60;i++)lesson(s,`Pad课次${i}`);return s;};
+test('two completed lessons fund two necklaces without spending growth or draws',()=>{
+ const s=fresh();hatch(s);
+ const oldSave=backupText(s);
+ const [moon,berry]=ITEMS.necklace;
+ assert.throws(()=>equip(s,'necklace',moon.id),/星星不够/);
+ lesson(s,'第一课');equip(s,'necklace',moon.id);
+ assert.throws(()=>equip(s,'necklace',berry.id),/星星不够/);
+ lesson(s,'第二课');equip(s,'necklace',berry.id);
+ assert.equal(current(s).outfit.necklace,berry.id);
+ equip(s,'necklace',moon.id);
+ assert.deepEqual([s.stars,s.tickets,current(s).points],[0,2,2]);
+ assert.ok(!PRIZES.some(i=>i.id===moon.id||i.id===berry.id));
+ assert.deepEqual(parseBackup(backupText(s)),s);
+ assert.equal(current(parseBackup(oldSave)).outfit.necklace,undefined);
+});
 test('expanded catalog keeps old IDs and offers 12 clothes, 8 hands, 12 paints, 10 decor and 16 species',()=>{
- assert.deepEqual([ITEMS.clothes.length,ITEMS.hand.length,ITEMS.makeup.length,PRIZES.filter(i=>i.kind==='decor').length,SPECIES.length],[12,8,12,10,16]);assert.equal(new Set(allItems.map(i=>i.id)).size,60);
+ assert.deepEqual([ITEMS.clothes.length,ITEMS.hand.length,ITEMS.makeup.length,PRIZES.filter(i=>i.kind==='decor').length,SPECIES.length],[12,8,12,10,16]);assert.equal(new Set(allItems.map(i=>i.id)).size,allItems.length);
  for(const id of ['mint-top','pink-top','blue-pants','yellow-pants','wand','heart-wand','blush','stars','flower-pot','mushroom','gift','rainbow'])assert.ok(allItems.some(i=>i.id===id));
 });
 test('all themed clothes and hand tools have distinct non-color geometry',()=>{
